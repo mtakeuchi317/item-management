@@ -30,6 +30,7 @@
                                 <th>作者</th>
                                 <th>カテゴリー</th>
                                 <th>詳細</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +50,17 @@
                                     <td>{{ $item->author }}</td>
                                     <td>{{ $item->category }}</td>
                                     <td>{{ $item->detail }}</td>
+                                    <!-- 編集ボタン -->
+                                    <td>
+                                        <form action="{{route('item/edit',['id'=>$item->id])}}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-primary">編集</button>
+                                        </form>
+                                    </td>
+                                    <!-- 削除ボタン -->
+                                    <td>
+                                        
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
