@@ -20,22 +20,32 @@
             @endif
 
             <div class="card card-primary">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">名前</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="名前">
+                            <label for="title">タイトル</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="タイトル">
                         </div>
 
                         <div class="form-group">
-                            <label for="type">種別</label>
-                            <input type="text" class="form-control" id="type" name="type" placeholder="種別">
+                            <label for="type">作者</label>
+                            <input type="text" class="form-control" id="author" name="author" placeholder="作者">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">カテゴリー</label>
+                            <input type="text" class="form-control" id="category" name="category" placeholder="カテゴリー">
                         </div>
 
                         <div class="form-group">
                             <label for="detail">詳細</label>
                             <input type="text" class="form-control" id="detail" name="detail" placeholder="詳細説明">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="img_name">商品画像</label>
+                            <input type="file" class="form-control" name="img_name" id="img_name">
                         </div>
                     </div>
 

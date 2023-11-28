@@ -36,18 +36,38 @@ class ItemController extends Controller
     {
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
-            // バリデーション
-            $this->validate($request, [
-                'name' => 'required|max:100',
-            ]);
-
-            // 商品登録
-            Item::create([
-                'user_id' => Auth::user()->id,
-                'name' => $request->name,
-                'type' => $request->type,
-                'detail' => $request->detail,
-            ]);
+            $validated = $request->validate(
+                [
+                    'title' => 'required|max:100',
+                    'author' => 'required|max:100',
+                    'category' => 'required|max:100',
+                    'detail' => 'nullable',
+                    'img_name' => 'nullable|file|mimes:jpeg,png,jpg,gif,bmp,svg|max:50'
+                ],
+                [
+                    'title.required' => 'タイトルを入力してください。',
+                    'title.max' => 'タイトルは100文字以内で入力してください。',
+                    'author.required' => '作者名を入力してください。',
+                    'author.max' => '作者名は100文字以内で入力してください。',
+                    'category.required' => 'カテゴリーを入力してください。',
+                    'category.max' => 'カテゴリーは100文字以内で入力してください。',
+                    'img_name.mimes' => '画像形式ファイルをアップロードしてください.',
+                    'img_name.max' => '画像ファイルは50キロバイト以下のファイルを選択してください。'
+                ]);
+        
+                // 画像ファイルを処理する
+                $imageData = null;
+                if ($request->hasFile('img_name')) {
+                    $image = $request->file('img_name');
+                    $imageData ='data:image/png;base64,'.base64_encode(file_get_contents($image->path()));
+                } 
+                Item::create([
+                    'title' => $validated['title'],
+                    'author' => $validated['author'],
+                    'category' => $validated['category'],
+                    'detail' => $validated['detail'],
+                    'img_name' => $imageData
+                ]);
 
             return redirect('/items');
         }

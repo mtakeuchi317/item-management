@@ -13,9 +13,11 @@ class Item extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
-        'type',
+        'title',
+        'author',
+        'category',
         'detail',
+        'img_name',
     ];
 
     /**

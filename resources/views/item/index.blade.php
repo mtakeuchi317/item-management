@@ -25,8 +25,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>名前</th>
-                                <th>種別</th>
+                                <th>画像</th>
+                                <th>タイトル</th>
+                                <th>作者</th>
+                                <th>カテゴリー</th>
                                 <th>詳細</th>
                             </tr>
                         </thead>
@@ -34,8 +36,18 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type }}</td>
+                                    <td>
+                                        @if($item->img_name)
+                                        <img src="{{ $item->img_name }}" alt="Product Image">
+                                        @else
+                                            <div class="no-img">
+                                                <p>No Image</p>
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>{{ $item->author }}</td>
+                                    <td>{{ $item->category }}</td>
                                     <td>{{ $item->detail }}</td>
                                 </tr>
                             @endforeach
