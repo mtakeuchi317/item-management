@@ -141,4 +141,14 @@ class ItemController extends Controller
         }
         return view('item.edit', compact('item'));
     }
+
+    /**
+     * 商品削除処理
+     */
+    public function destroy($id)
+    {
+        $item = Item::find($id);
+        $item->delete();
+        return redirect()->back();
+    }
 }

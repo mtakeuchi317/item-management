@@ -59,7 +59,11 @@
                                     </td>
                                     <!-- 削除ボタン -->
                                     <td>
-                                        
+                                        <form action="{{route('item/delete',['id'=>$item->id])}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger" onclick="return deleteAlert();">削除</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
