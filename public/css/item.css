@@ -1,0 +1,12 @@
+/* テーブルの各td内のテキストを垂直方向に中央寄せ */
+.table td {
+    vertical-align: middle;
+    table-layout: fixed;
+    height: 100px; /* 適切な高さに調整 */
+    overflow: hidden; /* 必要に応じて溢れた内容を隠す */
+}
+.img_name img {
+    height: 100%;
+    width: auto; /* 幅を自動調整 */
+    max-width: 100%; /* 最大幅を親要素に合わせる */
+}

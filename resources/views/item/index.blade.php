@@ -29,7 +29,7 @@
                                 <th>タイトル</th>
                                 <th>作者</th>
                                 <th>カテゴリー</th>
-                                <th>詳細</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -37,19 +37,18 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>
+                                    <td class="img_name">
                                         @if($item->img_name)
-                                        <img src="{{ $item->img_name }}" alt="Product Image">
+                                            <!-- img_name が存在する場合の処理 -->
+                                            <img src="{{ $item->img_name }}" alt="Product Image">
                                         @else
-                                            <div class="no-img">
-                                                <p>No Image</p>
-                                            </div>
+                                            <!-- img_name が存在しない場合の処理 -->
+                                            <img src="http://design-ec.com/d/e_others_50/m_e_others_500.png" alt="No Image">
                                         @endif
                                     </td>
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->author }}</td>
                                     <td>{{ $item->category }}</td>
-                                    <td>{{ $item->detail }}</td>
                                     <!-- 編集ボタン -->
                                     <td>
                                         <form action="{{route('item/edit',['id'=>$item->id])}}" method="get">
@@ -76,6 +75,7 @@
 @stop
 
 @section('css')
+    <link href="{{ asset('css/item.css') }}" rel="stylesheet">
 @stop
 
 @section('js')
