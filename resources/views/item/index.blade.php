@@ -38,6 +38,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td class="img_name">
+                                    <a href="{{ route('itemsinfo', ['id'=>$item->id]) }}">
                                         @if($item->img_name)
                                             <!-- img_name が存在する場合の処理 -->
                                             <img src="{{ $item->img_name }}" alt="Product Image">

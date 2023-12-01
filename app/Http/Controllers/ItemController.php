@@ -151,4 +151,12 @@ class ItemController extends Controller
         $item->delete();
         return redirect()->back();
     }
+
+    /**
+     * 商品詳細画面
+     */
+    public function itemsinfo($id){
+        $info = Item::find($id);
+        return view('item.itemsinfo', ['info' => $info]);
+    }
 }

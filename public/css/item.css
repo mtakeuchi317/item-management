@@ -1,3 +1,5 @@
+/* index */
+
 /* テーブルの各td内のテキストを垂直方向に中央寄せ */
 .table td {
     vertical-align: middle;
@@ -9,4 +11,12 @@
     height: 100%;
     width: auto; /* 幅を自動調整 */
     max-width: 100%; /* 最大幅を親要素に合わせる */
+}
+
+/* itemsinfo */
+.itemsinfo-main{
+    display: flex;
+}
+.product-details li{
+    list-style: none;
 }
