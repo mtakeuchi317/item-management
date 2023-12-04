@@ -159,4 +159,13 @@ class ItemController extends Controller
         $info = Item::find($id);
         return view('item.itemsinfo', ['info' => $info]);
     }
+
+    /**
+     * カテゴリー毎の商品一覧ページ
+     */
+    public function showByCategory($category)
+    {
+        $items = Item::where('category', $category)->get();
+        return view('item.category', compact('items'));
+    }
 }

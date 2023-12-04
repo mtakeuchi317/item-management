@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\Facades\DB;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,8 +20,23 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(Dispatcher $events): void
     {
-        //
+        $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
+            $event->menu->add('商品一覧');
+            $event->menu->add([
+                'text' => '全て',
+                'url' => 'items',
+            ]);
+
+            $categories = DB::table('items')->distinct()->pluck('category');
+
+            foreach ($categories as $category) {
+                $event->menu->add([
+                    'text' => $category,
+                    'url' => 'items/category/' . urlencode($category),
+                ]);
+            }
+        });
     }
 }
