@@ -6,6 +6,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\DB;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
                     'url' => 'items/category/' . urlencode($category),
                 ]);
             }
+        });
+
+        Validator::extend('katakana', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/[ァ-ヴー]+/u', $value);
         });
     }
 }
