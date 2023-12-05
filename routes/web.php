@@ -31,3 +31,9 @@ Route::prefix('items')->group(function () {
     Route::get('/itemsinfo/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfo'])->name('itemsinfo');
     Route::get('/category/{category}', [App\Http\Controllers\ItemController::class, 'showByCategory'])->name('items.category');
 });
+
+Route::prefix('users')->group(function () {
+    Route::get('/', [App\Http\Controllers\UserController::class, 'list']);
+    Route::get('edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
+    Route::post('edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
+});
