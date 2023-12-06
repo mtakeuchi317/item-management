@@ -293,7 +293,55 @@ return [
         [
             'text' => '商品一覧',
             'url'  => 'items',
-            'icon' => 'fas fa-gamepad',
+            'icon' => 'fas fa-book-open',
+            'submenu' => [
+                [
+                    'text' => 'すべての商品',
+                    'url'  => 'items',
+                ],
+                [
+                    'text' => '文芸書',
+                    'url'  => 'items/文芸書',
+                ],
+                [
+                    'text' => '人文書',
+                    'url'  => 'items/人文書',
+                ],
+                [
+                    'text' => '専門書',
+                    'url'  => 'items/専門書',
+                ],
+                [
+                    'text' => '実用書',
+                    'url'  => 'items/実用書',
+                ],
+                [
+                    'text' => 'ビジネス・経済・経営',
+                    'url'  => 'items/ビジネス・経済・経営',
+                ],
+                [
+                    'text' => '児童書・絵本',
+                    'url'  => 'items/児童書・絵本',
+                ],
+                [
+                    'text' => '学習参考書',
+                    'url'  => 'items/学習参考書',
+                ],
+                [
+                    'text' => 'マンガ・コミックス',
+                    'url'  => 'items/マンガ・コミックス',
+                ],
+            ]
+        ],
+        [
+            'text' => '商品登録',
+            'url'  => 'items/add',
+            'icon' => 'fas fa-user',
+        ],
+        [
+            'text' => '会員一覧',
+            'url'  => 'users',
+            'icon' => 'fas fa-user',
         ],
 
         // AdminLTEデフォルト

@@ -55,24 +55,28 @@ class ItemController extends Controller
                     'img_name.max' => '画像ファイルは50キロバイト以下のファイルを選択してください。'
                 ]);
         
-                // 画像ファイルを処理する
-                $imageData = null;
                 if ($request->hasFile('img_name')) {
                     $image = $request->file('img_name');
-                    $imageData ='data:image/png;base64,'.base64_encode(file_get_contents($image->path()));
-                } 
-                Item::create([
+                    $imageData = 'data:image/png;base64,' . base64_encode(file_get_contents($image->path()));
+                } else {
+                    $imageData = null;
+                }
+        
+                // データの再確認
+                $data = [
                     'title' => $validated['title'],
                     'author' => $validated['author'],
                     'category' => $validated['category'],
                     'detail' => $validated['detail'],
                     'img_name' => $imageData
-                ]);
-
-            return redirect('/items');
-        }
-
-        return view('item.add');
+                ];
+        
+                // データを作成してリダイレクト
+                Item::create($data);
+                return redirect()->route('index');
+            }
+        
+            return view('item.add');
     }
 
     /**
@@ -165,7 +169,11 @@ class ItemController extends Controller
      */
     public function showByCategory($category)
     {
+        // カテゴリーに基づいて商品を取得する処理を書く
         $items = Item::where('category', $category)->get();
-        return view('item.category', compact('items'));
+
+        // 取得した商品をビューに渡して表示する
+        return view('item.index', compact('items'));
     }
+
 }

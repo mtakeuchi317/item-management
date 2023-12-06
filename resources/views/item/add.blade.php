@@ -9,15 +9,6 @@
 @section('content')
     <div class="row">
         <div class="col-md-10">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
             <div class="card card-primary">
                 <form method="POST" enctype="multipart/form-data">
@@ -26,16 +17,35 @@
                         <div class="form-group">
                             <label for="title">タイトル</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="タイトル">
+                            @if($errors->has('title'))
+                                <p class="text-danger">{{ $errors->first('title') }}</p>
+                            @endif
                         </div>
 
                         <div class="form-group">
                             <label for="type">作者</label>
                             <input type="text" class="form-control" id="author" name="author" placeholder="作者">
+                            @if($errors->has('author'))
+                                <p class="text-danger">{{ $errors->first('author') }}</p>
+                            @endif
                         </div>
 
                         <div class="form-group">
                             <label for="type">カテゴリー</label>
-                            <input type="text" class="form-control" id="category" name="category" placeholder="カテゴリー">
+                            <select class="form-control" id="category" name="category">
+                                <option value="" selected disabled>選択してください</option>
+                                <option value="文芸書">文芸書</option>
+                                <option value="人文書">人文書</option>
+                                <option value="専門書">専門書</option>
+                                <option value="実用書">実用書</option>
+                                <option value="ビジネス・経済・経営">ビジネス・経済・経営</option>
+                                <option value="児童書・絵本">児童書・絵本</option>
+                                <option value="学習参考書">学習参考書</option>
+                                <option value="マンガ・コミックス">マンガ・コミックス</option>
+                            </select>
+                            @if($errors->has('category'))
+                                <p class="text-danger">{{ $errors->first('category') }}</p>
+                            @endif
                         </div>
 
                         <div class="form-group">
@@ -46,6 +56,9 @@
                         <div class="form-group">
                             <label for="img_name">商品画像</label>
                             <input type="file" class="form-control" name="img_name" id="img_name">
+                            @if($errors->has('img_name'))
+                                <p class="text-danger">{{ $errors->first('img_name') }}</p>
+                            @endif
                         </div>
                     </div>
 
