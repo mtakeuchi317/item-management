@@ -64,4 +64,14 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
+        /**
+     * 商品削除処理
+     */
+    public function destroy($id)
+    {
+        $item = User::find($id);
+        $item->delete();
+        return redirect()->back();
+    }
+
 }

@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('名前') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('名前') }} <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="name_kana" class="col-md-4 col-form-label text-md-end">{{ __('フリガナ') }}</label>
+                            <label for="name_kana" class="col-md-4 col-form-label text-md-end">{{ __('フリガナ（全角）') }} <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="name_kana" type="text" class="form-control @error('name_kana') is-invalid @enderror" name="name_kana" value="{{ old('name_kana') }}" required autocomplete="name_kana" autofocus>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('性別') }}</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('性別') }} <span class="text-danger">*</span></label>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender" id="gender_male" value="男">
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="row mb-3">    
-                            <label for="birthday" class="col-md-4 col-form-label text-md-end">生年月日<span class="badge text-bg-danger">必須</span></label>
+                            <label for="birthday" class="col-md-4 col-form-label text-md-end">生年月日 <span class="text-danger">*</span></label>
                                 <div class="col-md-6" >
                                     <input class="form-control" type="date" name="birthday"  id="birthday" value="{{ old('birthday')}}">
                                         <!-- バリデーション表示 -->
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('電話番号') }}</label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('電話番号') }} <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('メールアドレス') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('メールアドレス') }} <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('パスワード') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('パスワード') }} <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('パスワード（確認）') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('パスワード（確認）') }} <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -125,7 +125,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('登録') }}
                                 </button>
                             </div>
                         </div>

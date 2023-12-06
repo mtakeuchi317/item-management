@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Validator::extend('katakana', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/\A[ァ-ヶー　]+\z/u', $value); // カタカナの正規表現パターン
+        });
+    
+        Validator::replacer('katakana', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', 'フリガナ', ':attributeは全角カタカナで入力してください');
+        });
     }
 }
