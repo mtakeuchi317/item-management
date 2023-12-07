@@ -22,7 +22,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('items')->group(function () {
-    Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('item/index');
+    Route::get('/list', [App\Http\Controllers\ItemController::class, 'list'])->name('item/list');
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('item/edit');
@@ -30,6 +31,7 @@ Route::prefix('items')->group(function () {
     Route::delete('/delete/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('item/delete');
     Route::get('/itemsinfo/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfo'])->name('itemsinfo');
     Route::get('/{category}', [App\Http\Controllers\ItemController::class, 'showByCategory'])->name('items.by.category');
+    Route::get('/list/{category}', [App\Http\Controllers\ItemController::class, 'showByCategoryList'])->name('items.list.by.category');
 });
 
 Route::prefix('users')->group(function () {

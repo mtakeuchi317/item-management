@@ -3,76 +3,47 @@
 @section('title', '商品一覧')
 
 @section('content_header')
-    <h1>商品一覧</h1>
+    <h1>商品一覧（ユーザー画面）</h1>
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">商品一覧</h3>
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-append">
-                                <a href="{{ url('items/add') }}" class="btn btn-default">商品登録</a>
-                            </div>
-                        </div>
-                    </div>
+
+<!-- 編集成功時のメッセージ -->
+@if ( session('message') )
+    <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+@endif
+<!-- 商品検索 -->
+<div class="search">
+    <form action="{{route('item/list')}}" method="get">
+    @csrf
+        <input type="text" class="form-control" name="keyword" value="{{$keyword}}" placeholder="キーワード検索">
+        <button type="submit"  class="btn btn-primary">検索</button>
+    </form>
+</div>
+
+<!-- 商品一覧 -->
+<div class="items">
+    @foreach($items as $item)
+    <div class="item">
+        <a href="{{ route('itemsinfo', ['id'=>$item->id]) }}">
+            @if($item->img_name)
+            <img src="{{ $item->img_name }}" class="card-img-top" alt="Product Image">
+            @else
+                <div class="no-img">
+                    <!-- img_name が存在しない場合の処理 -->
+                    <img src="http://design-ec.com/d/e_others_50/m_e_others_500.png" alt="No Image">
                 </div>
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>画像</th>
-                                <th>タイトル</th>
-                                <th>作者</th>
-                                <th>カテゴリー</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($items as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td class="img_name">
-                                    <a href="{{ route('itemsinfo', ['id'=>$item->id]) }}">
-                                        @if($item->img_name)
-                                            <!-- img_name が存在する場合の処理 -->
-                                            <img src="{{ $item->img_name }}" alt="Product Image">
-                                        @else
-                                            <!-- img_name が存在しない場合の処理 -->
-                                            <img src="http://design-ec.com/d/e_others_50/m_e_others_500.png" alt="No Image">
-                                        @endif
-                                    </td>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->author }}</td>
-                                    <td>{{ $item->category }}</td>
-                                    <!-- 編集ボタン -->
-                                    <td>
-                                        <form action="{{route('item/edit',['id'=>$item->id])}}" method="get">
-                                            @csrf
-                                            <button type="submit" class="btn btn-outline-primary">編集</button>
-                                        </form>
-                                    </td>
-                                    <!-- 削除ボタン -->
-                                    <td>
-                                        <form action="{{route('item/delete',['id'=>$item->id])}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger" onclick="return deleteAlert();">削除</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+            @endif
+        </a>
+        <p class="title">{{$item->title}}</p>
+        <p>{{$item->author}}</p>
+        <p>{{$item->category}}</p>
     </div>
+    @endforeach
+</div>
+<div class="paginate">
+    {{ $items->links('pagination::bootstrap-5') }}
+</div>
 @stop
 
 @section('css')

@@ -18,15 +18,42 @@ class ItemController extends Controller
         $this->middleware('auth');
     }
 
+    //ユーザー用ページ
     /**
      * 商品一覧
      */
-    public function index()
+    public function index(Request $request)
+    {
+        // 検索フォームで入力された値を取得する
+        $keyword = $request->input('keyword');
+
+        // クエリビルダ
+        $query = Item::query()->latest();
+
+        if(!empty($keyword)){
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('author', 'LIKE', "%{$keyword}%")
+                ->orWhere('category', 'LIKE', "%{$keyword}%");
+            });
+        }
+        $items = $query->paginate(14);
+        return view('item.index', compact('keyword', 'items'));
+        
+    }
+
+    
+    // 管理者用ページ
+
+    /**
+     * 商品一覧（管理）
+     */
+    public function list()
     {
         // 商品一覧取得
         $items = Item::all();
 
-        return view('item.index', compact('items'));
+        return view('item.list', compact('items'));
     }
 
     /**
@@ -73,7 +100,7 @@ class ItemController extends Controller
         
                 // データを作成してリダイレクト
                 Item::create($data);
-                return redirect()->route('index');
+                return redirect()->route('item/list');
             }
         
             return view('item.add');
@@ -141,7 +168,7 @@ class ItemController extends Controller
                         'detail' => $validated['detail'],
                     ]);
                 }
-            return redirect('/items');
+            return redirect()->route('item/list');
         }
         return view('item.edit', compact('item'));
     }
@@ -182,11 +209,22 @@ class ItemController extends Controller
      */
     public function showByCategory($category)
     {
+        $keyword = null; // $keyword を定義する
+
+        // カテゴリーに基づいて商品を取得する処理を書く
+        $items = Item::where('category', $category)->paginate(14);
+    
+        // 取得した商品をビューに渡して表示する
+        return view('item.index', compact('keyword', 'items'));
+    }
+
+    public function showByCategoryList($category)
+    {
         // カテゴリーに基づいて商品を取得する処理を書く
         $items = Item::where('category', $category)->get();
 
-        // 取得した商品をビューに渡して表示する
-        return view('item.index', compact('items'));
+        // 取得した商品を別のビューに渡して表示する（例：item.list.list）
+        return view('item.list', compact('items'));
     }
 
 }

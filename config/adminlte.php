@@ -334,11 +334,57 @@ return [
             ]
         ],
         [
-            'text' => '商品登録',
-            'url'  => 'items/add',
-            'icon' => 'fas fa-user',
+            'key'        => '商品一覧（管理）_admin_only',
+            'text' => '商品一覧（管理）',
+            'url'  => 'items/list',
+            'icon' => 'fas fa-book-open',
+            'submenu' => [
+                [
+                    'text' => 'すべての商品',
+                    'url'  => 'items/list',
+                ],
+                [
+                    'text' => '文芸書',
+                    'url'  => 'items/list/文芸書',
+                ],
+                [
+                    'text' => '人文書',
+                    'url'  => 'items/list/人文書',
+                ],
+                [
+                    'text' => '専門書',
+                    'url'  => 'items/list/専門書',
+                ],
+                [
+                    'text' => '実用書',
+                    'url'  => 'items/list/実用書',
+                ],
+                [
+                    'text' => 'ビジネス・経済・経営',
+                    'url'  => 'items/list/ビジネス・経済・経営',
+                ],
+                [
+                    'text' => '児童書・絵本',
+                    'url'  => 'items/list/児童書・絵本',
+                ],
+                [
+                    'text' => '学習参考書',
+                    'url'  => 'items/list/学習参考書',
+                ],
+                [
+                    'text' => 'マンガ・コミックス',
+                    'url'  => 'items/list/マンガ・コミックス',
+                ],
+            ]
         ],
         [
+            'key'        => '商品登録_admin_only',
+            'text' => '商品登録',
+            'url'  => 'items/add',
+            'icon' => 'fas fa-plus',
+        ],
+        [
+            'key'        => '会員一覧_admin_only',
             'text' => '会員一覧',
             'url'  => 'users',
             'icon' => 'fas fa-user',

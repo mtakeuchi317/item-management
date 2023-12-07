@@ -1,4 +1,59 @@
-/* index */
+/* item/index */
+.search form{
+    display: flex;
+    padding: 10px 0 20px 0;
+}
+.search input{
+    width: 70%;
+    margin-right: 10px;
+}
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.item {
+    width: 180px;
+    padding-bottom: 30px;
+    margin-right: 10px;
+}
+.item img{
+    width: 100%;
+    height: 230px;
+    border: 1px solid rgb(191, 191, 191);
+    object-fit: contain;
+    background-color: white;
+}
+.no-img{
+    width: 100%;
+    height: 230px;
+    border: 1px solid rgb(191, 191, 191);
+}
+.no-img p{
+    line-height: 230px;
+    color: gray;
+}
+.title{
+    font-weight: bold;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.item p{
+    margin: 3px;
+}
+.item form{
+    display: inline-block;
+}
+.paginate{
+    display: inline-block;
+}
+.paginate p{
+    display: none;
+}
+
+/* imte/list */
 
 /* テーブルの各td内のテキストを垂直方向に中央寄せ */
 .table td {
@@ -29,13 +84,6 @@
 .product-details li{
     list-style: none;
     padding: 5px 0;
-}
-.edit-delete-btn{
-    display: flex;
-    padding-left: 40px;
-}
-.edit-btn{
-    padding-right: 10px;
 }
 .link{
     display: flex;

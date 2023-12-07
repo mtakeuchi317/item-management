@@ -31,23 +31,6 @@
                     <li>カテゴリー：{{ $info->category }}</li>
                     <li>{{ $info->detail }}</li>
                 </ul>
-                <!-- 編集ボタン -->
-                <div class="edit-delete-btn">
-                    <div class="edit-btn">
-                        <form action="{{route('item/edit',['id'=>$info->id])}}" method="get">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-primary">編集</button>
-                        </form>
-                    </div>
-                    <!-- 削除ボタン -->
-                    <div class="delete-btn">
-                        <form action="{{route('item/delete',['id'=>$info->id])}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger" onclick="return deleteAlert();">削除</button>
-                        </form>
-                    </div>
-                </div>
                 <div class="link">
                     <div class="previous-page">
                         @if ($previousItemUrl)
@@ -65,7 +48,7 @@
                     </div>
                 </div>
                 <div class="back-link">
-                    <a href="{{ route('index') }}">商品一覧へ戻る</a>
+                    <a href="{{ route('item/index') }}">商品一覧へ戻る</a>
                 </div>
             </div>
         </div>
