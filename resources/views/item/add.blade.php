@@ -15,7 +15,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="title">タイトル</label>
+                            <label for="title">タイトル <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="タイトル">
                             @if($errors->has('title'))
                                 <p class="text-danger">{{ $errors->first('title') }}</p>
@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="type">作者</label>
+                            <label for="type">作者 <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="author" name="author" placeholder="作者">
                             @if($errors->has('author'))
                                 <p class="text-danger">{{ $errors->first('author') }}</p>
@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="type">カテゴリー</label>
+                            <label for="type">カテゴリー <span class="text-danger">*</span></label>
                             <select class="form-control" id="category" name="category">
                                 <option value="" selected disabled>選択してください</option>
                                 <option value="文芸書">文芸書</option>
