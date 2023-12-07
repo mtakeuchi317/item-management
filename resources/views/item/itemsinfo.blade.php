@@ -8,8 +8,6 @@
 
 @section('content')
     <div class="container">
-
-
         <!-- 商品詳細ページのメイン(メインコンテナ)部分 -->
         <div class="itemsinfo-main">
             <!-- メインコンテンツの左側(商品画像) -->
@@ -31,6 +29,30 @@
                     <li>カテゴリー：{{ $info->category }}</li>
                     <li>{{ $info->detail }}</li>
                 </ul>
+
+            <!-- お気に入りボタン -->
+            <span>               
+                <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+                @if($like)
+                    <!-- 「いいね」取消用ボタンを表示 -->
+                    <form action="{{ route('unlike', ['item' => $info->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-secondary btn-sm">
+                            ★お気に入り解除
+                        </button>
+                    </form>
+                @else
+                    <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                    <form action="{{ route('like', ['item' => $info->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm">
+                            ☆お気に入り登録
+                        </button>
+                    </form>
+                @endif
+            </span>
+
+
                 <div class="link">
                     <div class="previous-page">
                         @if ($previousItemUrl)
@@ -52,15 +74,14 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 @stop
 
 @section('css')
-<link href="{{ asset('css/item.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/item.css') }}" rel="stylesheet">
 @stop
 
 @section('js')
+    <script src="{{ asset('/js/item.js') }}"></script>
 @stop

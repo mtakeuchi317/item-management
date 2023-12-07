@@ -19,6 +19,14 @@ class Item extends Model
         'detail',
         'img_name',
     ];
+    
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

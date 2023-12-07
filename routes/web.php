@@ -24,6 +24,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::prefix('items')->group(function () {
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('item/index');
     Route::get('/list', [App\Http\Controllers\ItemController::class, 'list'])->name('item/list');
+    Route::get('/like', [App\Http\Controllers\ItemController::class, 'like'])->name('item/like');
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('item/edit');
@@ -41,3 +42,7 @@ Route::prefix('users')->group(function () {
     Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user/delete');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user/profile');
 });
+
+// いいねボタン
+Route::post('/itemsinfo/like/{item}', [App\Http\Controllers\LikeController::class, 'like'])->name('like');
+Route::post('/itemsinfo/unlike/{item}', [App\Http\Controllers\LikeController::class, 'unlike'])->name('unlike');

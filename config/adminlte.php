@@ -390,6 +390,11 @@ return [
             'icon' => 'fas fa-user',
         ],
         [
+            'text' => 'お気に入り',
+            'url'  => 'items/like',
+            'icon' => 'fas fa-star',
+        ],
+        [
             'text' => 'プロフィール',
             'url'  => 'users/profile',
             'icon' => 'fas fa-user',

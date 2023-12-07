@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\Like;
 
 class ItemController extends Controller
 {
@@ -39,8 +40,37 @@ class ItemController extends Controller
         }
         $items = $query->paginate(14);
         return view('item.index', compact('keyword', 'items'));
-        
     }
+
+    /**
+     * お気に入り一覧
+     */
+    public function like(Request $request)
+    {
+        // クエリビルダ
+        $query = Item::query()->latest();
+    
+        // ログインしているユーザーのIDを取得
+        $userId = Auth::id();
+    
+        // キーワード検索処理
+        $keyword = $request->input('keyword');
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('author', 'LIKE', "%{$keyword}%")
+                    ->orWhere('category', 'LIKE', "%{$keyword}%");
+            });
+        }
+    
+        // 商品検索処理
+        $items = $query->whereHas('likes', function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        })->paginate(14);
+    
+        return view('item.like', compact('keyword', 'items'));
+    }
+
 
     
     // 管理者用ページ
@@ -189,19 +219,22 @@ class ItemController extends Controller
     public function itemsinfo($id){
         $info = Item::find($id);
 
-        // 前の商品のIDを取得
-        $previousItemId = Item::where('id', '<', $info->id)->max('id');
+    // ユーザーがいいねしているか確認
+    $like = Like::where('item_id', $info->id)->where('user_id', auth()->id())->first();
 
-        // 次の商品のIDを取得
-        $nextItemId = Item::where('id', '>', $info->id)->min('id');
+    // 前の商品のIDを取得
+    $previousItemId = Item::where('id', '<', $info->id)->max('id');
 
-        // 前の商品のURL
-        $previousItemUrl = ($previousItemId) ? route('itemsinfo', ['id' => $previousItemId]) : '';
+    // 次の商品のIDを取得
+    $nextItemId = Item::where('id', '>', $info->id)->min('id');
 
-        // 次の商品のURL
-        $nextItemUrl = ($nextItemId) ? route('itemsinfo', ['id' => $nextItemId]) : '';
+    // 前の商品のURL
+    $previousItemUrl = ($previousItemId) ? route('itemsinfo', ['id' => $previousItemId]) : '';
 
-        return view('item.itemsinfo',  compact('info', 'previousItemUrl', 'nextItemUrl'));
+    // 次の商品のURL
+    $nextItemUrl = ($nextItemId) ? route('itemsinfo', ['id' => $nextItemId]) : '';
+
+    return view('item.itemsinfo', compact('info', 'like', 'previousItemUrl', 'nextItemUrl'));
     }
 
     /**

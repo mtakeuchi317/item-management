@@ -27,6 +27,14 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function items() {
+        return $this->hasMany('App\Models\Item');
+    }
+
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
