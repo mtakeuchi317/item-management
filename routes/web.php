@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/password/change', [App\Http\Controllers\Auth\ChangePasswordController::class, 'showChangePasswordForm'])->name('password.form');
+Route::post('/password/change', [App\Http\Controllers\Auth\ChangePasswordController::class, 'ChangePassword'])->name('password.change');
+
 
 Route::prefix('items')->group(function () {
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('item/index');
@@ -41,6 +44,8 @@ Route::prefix('users')->group(function () {
     Route::post('edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
     Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user/delete');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user/profile');
+    Route::get('/profile_edit/{id}', [App\Http\Controllers\UserController::class, 'profile_edit'])->name('user/profile_edit');
+    Route::post('/profile_edit/{id}', [App\Http\Controllers\UserController::class, 'profile_edit'])->name('user/profile_edit');
 });
 
 // いいねボタン

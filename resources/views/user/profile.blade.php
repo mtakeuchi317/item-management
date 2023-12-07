@@ -61,16 +61,8 @@
                             <p>{{ $user->email }}</p>
                         </div>
                     </div>
-
-                    <div class="row mb-3">
-                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('パスワード') }}</label>
-
-                        <div class="col-md-6">
-                            <p>********</p>
-                        </div>
-                    </div>
                 </div>
-                <form action="{{route('user/edit',['id'=>$user->id])}}" method="get">
+                <form action="{{route('user/profile_edit',['id'=>$user->id])}}" method="get">
                     @csrf
                     <button type="submit" class="btn btn-outline-primary">編集</button>
                 </form>

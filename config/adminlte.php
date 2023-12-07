@@ -395,9 +395,18 @@ return [
             'icon' => 'fas fa-star',
         ],
         [
-            'text' => 'プロフィール',
+            'text' => '会員情報',
             'url'  => 'users/profile',
             'icon' => 'fas fa-user',
+            'submenu' => [
+                [
+                    'text' => 'プロフィール',
+                    'url'  => 'users/profile',
+                ],
+                [
+                    'text' => 'パスワード変更',
+                    'url'  => 'password/change',
+                ],]
         ],
 
         // AdminLTEデフォルト
