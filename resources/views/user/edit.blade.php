@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', '会員情報編集')
+
+@section('content_header')
+    <h1>会員情報編集</h1>
+@stop
 
 @section('content')
 <div class="container">

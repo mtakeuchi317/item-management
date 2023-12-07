@@ -12,13 +12,6 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">会員一覧</h3>
-                    <!-- <div class="card-tools">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-append">
-                                <a href="{{ url('items/add') }}" class="btn btn-default">商品登録</a>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
@@ -52,6 +45,14 @@
                                             <button type="submit" class="btn btn-outline-primary">編集</button>
                                         </form>
                                     </td>
+                                    <!-- 削除ボタン -->
+                                    <td>
+                                        <form action="{{route('user/delete',['id'=>$user->id])}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger" onclick="return deleteAlert();">削除</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -67,4 +68,5 @@
 @stop
 
 @section('js')
+    <script src="{{ asset('/js/user.js') }}"></script>
 @stop
