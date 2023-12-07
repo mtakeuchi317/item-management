@@ -343,6 +343,11 @@ return [
             'url'  => 'users',
             'icon' => 'fas fa-user',
         ],
+        [
+            'text' => 'プロフィール',
+            'url'  => 'users/profile',
+            'icon' => 'fas fa-user',
+        ],
 
         // AdminLTEデフォルト
         /*

@@ -58,10 +58,10 @@ class UserController extends Controller
                     'email' => $validated['email'],
                 ]);
 
-            return redirect('users');
-        }
+                return redirect('users');
+            }
 
-        return view('user.edit', compact('user'));
+            return view('user.edit', compact('user'));
     }
 
         /**
@@ -72,6 +72,16 @@ class UserController extends Controller
         $item = User::find($id);
         $item->delete();
         return redirect()->back();
+    }
+
+    public function profile()
+    {
+        // ログインユーザーの情報を取得
+        $user = Auth::user();
+
+        // ビューにログインユーザーの情報を渡す
+        return view('user.profile', compact('user'));
+
     }
 
 }
