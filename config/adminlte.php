@@ -337,7 +337,7 @@ return [
             'key'        => '商品一覧（管理）_admin_only',
             'text' => '商品一覧（管理）',
             'url'  => 'items/list',
-            'icon' => 'fas fa-book-open',
+            'icon' => 'fas fa-bars',
             'submenu' => [
                 [
                     'text' => 'すべての商品',
@@ -387,7 +387,7 @@ return [
             'key'        => '会員一覧_admin_only',
             'text' => '会員一覧',
             'url'  => 'users',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-address-book',
         ],
         [
             'text' => 'お気に入り',
