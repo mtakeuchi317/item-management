@@ -161,7 +161,20 @@ class ItemController extends Controller
      */
     public function itemsinfo($id){
         $info = Item::find($id);
-        return view('item.itemsinfo', ['info' => $info]);
+
+        // 前の商品のIDを取得
+        $previousItemId = Item::where('id', '<', $info->id)->max('id');
+
+        // 次の商品のIDを取得
+        $nextItemId = Item::where('id', '>', $info->id)->min('id');
+
+        // 前の商品のURL
+        $previousItemUrl = ($previousItemId) ? route('itemsinfo', ['id' => $previousItemId]) : '';
+
+        // 次の商品のURL
+        $nextItemUrl = ($nextItemId) ? route('itemsinfo', ['id' => $nextItemId]) : '';
+
+        return view('item.itemsinfo',  compact('info', 'previousItemUrl', 'nextItemUrl'));
     }
 
     /**

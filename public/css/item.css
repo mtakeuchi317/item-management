@@ -16,7 +16,34 @@
 /* itemsinfo */
 .itemsinfo-main{
     display: flex;
+    height: 500px;
+}
+.product-img .img-large {
+    width: 300px; /* 画像の幅を300pxに設定 */
+    height: auto; /* 高さは自動調整 */
+}
+
+.product-details{
+    width: 500px;
 }
 .product-details li{
     list-style: none;
+    padding: 5px 0;
+}
+.edit-delete-btn{
+    display: flex;
+    padding-left: 40px;
+}
+.edit-btn{
+    padding-right: 10px;
+}
+.link{
+    display: flex;
+    padding: 20px 0 0 40px;
+}
+.next-page{
+    padding-left: 10px;
+}
+.back-link{
+    padding: 10px 0 0 40px;
 }
