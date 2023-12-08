@@ -23,25 +23,42 @@
                 <form method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="title">タイトル</label>
-                            <input type="text" class="form-control" id="title" name="title"  value="{{$item->title}}">
-                        </div>
+                    <div class="form-group">
+                        <label for="title">タイトル</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $item->title) }}">
+                        @if($errors->has('title'))
+                            <p class="text-danger">{{ $errors->first('title') }}</p>
+                        @endif
+                    </div>
 
-                        <div class="form-group">
-                            <label for="author">作者</label>
-                            <input type="text" class="form-control" id="author" name="author" value="{{$item->author}}">
-                        </div>
+                    <div class="form-group">
+                        <label for="author">作者</label>
+                        <input type="text" class="form-control" id="author" name="author" value="{{ old('author', $item->author) }}">
+                        @if($errors->has('author'))
+                            <p class="text-danger">{{ $errors->first('author') }}</p>
+                        @endif
+                    </div>
 
-                        <div class="form-group">
-                            <label for="category">カテゴリー</label>
-                            <input type="text" class="form-control" id="category" name="category" value="{{$item->category}}">
-                        </div>
+                    <div class="form-group">
+                        <label for="category">カテゴリー</label>
+                        <select class="form-control" id="category" name="category">
+                            @foreach($categories as $category)
+                                <option value="{{$category}}" @if(old('category', $item->category) == $category) selected @endif>{{$category}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('category'))
+                            <p class="text-danger">{{ $errors->first('category') }}</p>
+                        @endif
+                    </div>
 
-                        <div class="form-group">
-                            <label for="detail">詳細</label>
-                            <input type="text" class="form-control" id="detail" name="detail"  value="{{$item->detail}}">
-                        </div>
+                    <div class="form-group">
+                        <label for="detail">詳細</label>
+                        <textarea class="form-control textarea" id="detail" name="detail" style="height: 200px; resize: none;">{{ old('detail', $item->detail) }}</textarea>
+                        @if($errors->has('detail'))
+                            <p class="text-danger">{{ $errors->first('detail') }}</p>
+                        @endif
+                    </div>
+
 
                         <!-- 新しい画像を選択するフォームフィールド -->
                         <div class="form-group">

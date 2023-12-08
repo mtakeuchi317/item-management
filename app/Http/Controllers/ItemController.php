@@ -81,7 +81,7 @@ class ItemController extends Controller
     public function list()
     {
         // 商品一覧取得
-        $items = Item::all();
+        $items = Item::paginate(7);
 
         return view('item.list', compact('items'));
     }
@@ -91,6 +91,16 @@ class ItemController extends Controller
      */
     public function add(Request $request)
     {
+        $categories = [
+            "文芸書",
+            "人文書",
+            "専門書",
+            "実用書",
+            "ビジネス・経済・経営",
+            "児童書・絵本",
+            "学習参考書",
+            "マンガ・コミックス"
+        ];
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             $validated = $request->validate(
@@ -98,7 +108,7 @@ class ItemController extends Controller
                     'title' => 'required|max:100',
                     'author' => 'required|max:100',
                     'category' => 'required|max:100',
-                    'detail' => 'nullable',
+                    'detail' => 'nullable|max:900',
                     'img_name' => 'nullable|file|mimes:jpeg,png,jpg,gif,bmp,svg|max:50'
                 ],
                 [
@@ -108,6 +118,7 @@ class ItemController extends Controller
                     'author.max' => '作者名は100文字以内で入力してください。',
                     'category.required' => 'カテゴリーを入力してください。',
                     'category.max' => 'カテゴリーは100文字以内で入力してください。',
+                    'detail.max' => '詳細は900文字以内で入力してください。',
                     'img_name.mimes' => '画像形式ファイルをアップロードしてください.',
                     'img_name.max' => '画像ファイルは50キロバイト以下のファイルを選択してください。'
                 ]);
@@ -133,7 +144,7 @@ class ItemController extends Controller
                 return redirect()->route('item/list');
             }
         
-            return view('item.add');
+            return view('item.add' ,compact('categories'));
     }
 
     /**
@@ -142,6 +153,16 @@ class ItemController extends Controller
     public function edit(Request $request, $id)
     {
         $item = Item::find($id);
+        $categories = [
+            "文芸書",
+            "人文書",
+            "専門書",
+            "実用書",
+            "ビジネス・経済・経営",
+            "児童書・絵本",
+            "学習参考書",
+            "マンガ・コミックス"
+        ];
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             $validated = $request->validate(
@@ -149,7 +170,7 @@ class ItemController extends Controller
                     'title' => 'required|max:100',
                     'author' => 'required|max:100',
                     'category' => 'required|max:100',
-                    'detail' => 'nullable',
+                    'detail' => 'nullable|max:900',
                     'img_name' => 'nullable|file|mimes:jpeg,png,jpg,gif,bmp,svg|max:50'
                 ],
                 [
@@ -159,6 +180,7 @@ class ItemController extends Controller
                     'author.max' => '作者名は100文字以内で入力してください。',
                     'category.required' => 'カテゴリーを入力してください。',
                     'category.max' => 'カテゴリーは100文字以内で入力してください。',
+                    'detail.max' => '詳細は900文字以内で入力してください。',
                     'img_name.mimes' => '画像形式ファイルをアップロードしてください.',
                     'img_name.max' => '画像ファイルは50キロバイト以下のファイルを選択してください。'
                 ]);
@@ -200,7 +222,7 @@ class ItemController extends Controller
                 }
             return redirect()->route('item/list');
         }
-        return view('item.edit', compact('item'));
+        return view('item.edit', compact('item', 'categories'));
     }
 
     /**

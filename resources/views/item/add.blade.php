@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title">タイトル <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="タイトル">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="タイトル" value="{{ old('title') }}">
                             @if($errors->has('title'))
                                 <p class="text-danger">{{ $errors->first('title') }}</p>
                             @endif
@@ -24,7 +24,7 @@
 
                         <div class="form-group">
                             <label for="type">作者 <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="author" name="author" placeholder="作者">
+                            <input type="text" class="form-control" id="author" name="author" placeholder="作者" value="{{ old('author') }}">
                             @if($errors->has('author'))
                                 <p class="text-danger">{{ $errors->first('author') }}</p>
                             @endif
@@ -33,15 +33,10 @@
                         <div class="form-group">
                             <label for="type">カテゴリー <span class="text-danger">*</span></label>
                             <select class="form-control" id="category" name="category">
-                                <option value="" selected disabled>選択してください</option>
-                                <option value="文芸書">文芸書</option>
-                                <option value="人文書">人文書</option>
-                                <option value="専門書">専門書</option>
-                                <option value="実用書">実用書</option>
-                                <option value="ビジネス・経済・経営">ビジネス・経済・経営</option>
-                                <option value="児童書・絵本">児童書・絵本</option>
-                                <option value="学習参考書">学習参考書</option>
-                                <option value="マンガ・コミックス">マンガ・コミックス</option>
+                                <option value="" disabled @if(old('category') == '') selected @endif>選択してください</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category}}" @if(old('category') == $category) selected @endif>{{$category}}</option>
+                                @endforeach
                             </select>
                             @if($errors->has('category'))
                                 <p class="text-danger">{{ $errors->first('category') }}</p>
@@ -49,8 +44,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="detail">詳細</label>
-                            <input type="text" class="form-control" id="detail" name="detail" placeholder="詳細説明">
+                            <label for="detail">詳細（900文字以内）</label>
+                            <textarea class="form-control textarea" id="detail" name="detail" placeholder="詳細説明" style="height: 200px; resize: none;">{{ old('detail') }}</textarea>
+                            @if($errors->has('detail'))
+                                <p class="text-danger">{{ $errors->first('detail') }}</p>
+                            @endif
                         </div>
 
                         <div class="form-group">
@@ -72,6 +70,7 @@
 @stop
 
 @section('css')
+<link href="{{ asset('css/item.css') }}" rel="stylesheet">
 @stop
 
 @section('js')
