@@ -73,6 +73,9 @@
             </div>
         </div>
     </div>
+    <div class="paginate">
+    {{ $items->links('pagination::bootstrap-5') }}
+    </div>
 @stop
 
 @section('css')

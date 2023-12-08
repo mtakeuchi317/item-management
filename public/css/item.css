@@ -20,9 +20,7 @@
 .item img{
     width: 100%;
     height: 230px;
-    border: 1px solid rgb(191, 191, 191);
     object-fit: contain;
-    background-color: white;
 }
 .no-img{
     width: 100%;
@@ -61,7 +59,11 @@
     table-layout: fixed;
     height: 100px; /* 適切な高さに調整 */
     overflow: hidden; /* 必要に応じて溢れた内容を隠す */
+    max-width: 200px; /* 表示する最大幅を設定 */
+    text-overflow: ellipsis; /* テキストが省略される際に「...」を表示 */
+    white-space: nowrap; /* テキストが折り返されないように設定 */
 }
+
 .img_name img {
     height: 100%;
     width: auto; /* 幅を自動調整 */
@@ -87,11 +89,12 @@
 }
 .link{
     display: flex;
-    padding: 20px 0 0 40px;
 }
 .next-page{
-    padding-left: 10px;
+    padding-left: 20px;
 }
-.back-link{
-    padding: 10px 0 0 40px;
+.like-btn{
+    margin: 20px 0;
+    padding: 10px;
 }
+

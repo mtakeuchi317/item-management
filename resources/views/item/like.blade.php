@@ -41,7 +41,7 @@
         <!-- お気に入り解除ボタン -->
         <form action="{{ route('unlike', ['item' => $item->id]) }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-success btn-sm">お気に入り解除</button>
+            <button type="submit" class="btn btn-secondary btn-sm">お気に入り解除</button>
         </form>
     </div>
     @endforeach
