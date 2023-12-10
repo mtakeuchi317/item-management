@@ -51,3 +51,9 @@ Route::prefix('users')->group(function () {
 // いいねボタン
 Route::post('/itemsinfo/like/{item}', [App\Http\Controllers\LikeController::class, 'like'])->name('like');
 Route::post('/itemsinfo/unlike/{item}', [App\Http\Controllers\LikeController::class, 'unlike'])->name('unlike');
+
+Route::group(['middleware' => 'admin'], function(){
+    Route::get('/admin', function(){
+        return 'OK';
+    });
+});

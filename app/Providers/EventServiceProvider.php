@@ -27,7 +27,9 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
-            if (auth()->user()->isAdmin == 2){
+            $isAdmin = auth()->user()->isAdmin;
+    
+            if (auth()->user()->isAdmin != 1) {
                 $event->menu->remove('商品一覧（管理）_admin_only');
                 $event->menu->remove('会員一覧_admin_only');
                 $event->menu->remove('商品登録_admin_only');
