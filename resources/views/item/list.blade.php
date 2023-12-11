@@ -3,7 +3,7 @@
 @section('title', '商品一覧')
 
 @section('content_header')
-    <h1>商品一覧（管理）</h1>
+    <h1>商品一覧（管理）<{{ isset($category) ? $category : 'すべての商品' }}></h1>
 @stop
 
 @section('content')

@@ -270,7 +270,7 @@ class ItemController extends Controller
         $items = Item::where('category', $category)->paginate(14);
     
         // 取得した商品をビューに渡して表示する
-        return view('item.index', compact('keyword', 'items'));
+        return view('item.index', compact('keyword', 'items', 'category'));
     }
 
     public function showByCategoryList($category)
@@ -279,7 +279,7 @@ class ItemController extends Controller
         $items = Item::where('category', $category)->paginate(7);
 
         // 取得した商品を別のビューに渡して表示する（例：item.list.list）
-        return view('item.list', compact('items'));
+        return view('item.list', compact('items', 'category'));
     }
 
 }
