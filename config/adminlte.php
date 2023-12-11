@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>商品管理</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>book.jp</b>',
+    'logo_img' => 'img/Book icon.png',
+    'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => '商品管理',
@@ -334,6 +334,25 @@ return [
             ]
         ],
         [
+            'text' => 'お気に入り',
+            'url'  => 'items/like',
+            'icon' => 'fas fa-star',
+        ],
+        [
+            'text' => '会員情報',
+            'url'  => 'users/profile',
+            'icon' => 'fas fa-user',
+            'submenu' => [
+                [
+                    'text' => 'プロフィール',
+                    'url'  => 'users/profile',
+                ],
+                [
+                    'text' => 'パスワード変更',
+                    'url'  => 'password/change',
+                ],]
+        ],
+        [
             'key'        => '商品一覧（管理）_admin_only',
             'text' => '商品一覧（管理）',
             'url'  => 'items/list',
@@ -389,26 +408,6 @@ return [
             'url'  => 'users',
             'icon' => 'fas fa-address-book',
         ],
-        [
-            'text' => 'お気に入り',
-            'url'  => 'items/like',
-            'icon' => 'fas fa-star',
-        ],
-        [
-            'text' => '会員情報',
-            'url'  => 'users/profile',
-            'icon' => 'fas fa-user',
-            'submenu' => [
-                [
-                    'text' => 'プロフィール',
-                    'url'  => 'users/profile',
-                ],
-                [
-                    'text' => 'パスワード変更',
-                    'url'  => 'password/change',
-                ],]
-        ],
-
         // AdminLTEデフォルト
         /*
         // Navbar items:
