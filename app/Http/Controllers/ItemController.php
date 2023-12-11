@@ -108,8 +108,23 @@ class ItemController extends Controller
         }
     
         $items->appends(['sort_by' => $select]); // 並べ替えの情報を追加する
+
+        // 検索フォームで入力された値を取得する
+        $keyword = $request->input('keyword');
+
+        // クエリビルダ
+        $query = Item::query()->latest();
+
+        if(!empty($keyword)){
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('author', 'LIKE', "%{$keyword}%")
+                ->orWhere('category', 'LIKE', "%{$keyword}%");
+            });
+        }
+        $items = $query->paginate(7);
     
-        return view('item.list', compact('items', 'select'));
+        return view('item.list', compact('items', 'select', 'keyword'));
     }
     
 
@@ -289,52 +304,70 @@ class ItemController extends Controller
     /**
      * カテゴリー毎の商品一覧ページ
      */
-    public function showByCategory($category)
+    public function showByCategory($category, Request $request)
     {
-        $keyword = null; // $keyword を定義する
-
+        $keyword = $request->input('keyword'); // リクエストからキーワードを取得
+    
         // カテゴリーに基づいて商品を取得する処理を書く
-        $items = Item::where('category', $category)->paginate(14);
+        $query = Item::where('category', $category);
+    
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%$keyword%")
+                    ->orWhere('author', 'like', "%$keyword%");
+            });
+        }
+    
+        $items = $query->paginate(14);
     
         // 取得した商品をビューに渡して表示する
         return view('item.index', compact('keyword', 'items', 'category'));
     }
+    
+    
 
     public function showByCategoryList($category, Request $request)
     {
-        // カテゴリーに基づいて商品を取得する処理を書く
         $select = $request->sort_by;
+        $keyword = $request->keyword;
+    
+        $query = Item::where('category', $category)->withCount('likes');
+    
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%$keyword%")
+                    ->orWhere('author', 'like', "%$keyword%");
+            });
+        }
+    
         switch ($select) {
             case '1':
                 //「指定なし」はID順
-                $items = Item::where('category', $category)
-                    ->withCount('likes')->latest()->paginate(7);
+                $items = $query->latest()->paginate(7);
                 break;
             case '2':
                 // 「登録順」でソート
-                $items = Item::where('category', $category)
-                            ->withCount('likes')->oldest()->paginate(7);
+                $items = $query->oldest()->paginate(7);
                 break;
             case '3':
                 // 「お気に入り数が多い順」でソート
-                $items = Item::where('category', $category)
-                            ->withCount('likes')->orderBy('likes_count', 'desc')->paginate(7);
+                $items = $query->orderBy('likes_count', 'desc')->paginate(7);
                 break;
             case '4':
                 // 「お気に入り数が少ない順」でソート
-                $items = Item::where('category', $category)
-                            ->withCount('likes')->orderBy('likes_count', 'asc')->paginate(7);
+                $items = $query->orderBy('likes_count', 'asc')->paginate(7);
                 break;
-            default :
+            default:
                 // デフォルトはID順
-                $items = Item::where('category', $category)
-                            ->withCount('likes')->latest()->paginate(7);
+                $items = $query->latest()->paginate(7);
                 break;
         }
-    $items->appends(['sort_by' => $select]); // 並べ替えの情報を追加する
-
-        // 取得した商品を別のビューに渡して表示する（例：item.list.list）
-        return view('item.list', compact('items', 'category', 'select'));
+    
+        $items->appends(['sort_by' => $select, 'keyword' => $keyword]);
+    
+        return view('item.list', compact('items', 'category', 'select', 'keyword'));
     }
+    
+
 
 }

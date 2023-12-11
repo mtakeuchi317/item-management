@@ -10,10 +10,10 @@
 
 <!-- 商品検索 -->
 <div class="search">
-    <form action="{{route('item/index')}}" method="get">
-    @csrf
-        <input type="text" class="form-control" name="keyword" value="{{$keyword}}" placeholder="キーワード検索">
-        <button type="submit"  class="btn btn-primary">検索</button>
+    <form action="{{ url()->current() }}" method="GET">
+        @csrf
+        <input type="text" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="キーワード検索">
+        <button type="submit" class="btn btn-primary">検索</button>
     </form>
 </div>
 
