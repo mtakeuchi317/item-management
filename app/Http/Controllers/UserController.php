@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         $user= User::find($id);
         // POSTリクエストのとき
-        if ($request->isMethod('post')) {
+        if ($request->isMethod('put')) {
             $validated = $request->validate(
                 [
                     'name'=>'required|max:100',
@@ -35,6 +35,7 @@ class UserController extends Controller
                     'birthday' => 'required',
                     'phone'=>'required|digits:11',
                     'email'=>'required|email:filter,dns|unique:users,email,'. $id . '',
+                    'isAdmin'=>'required|numeric'
                 ],
                 [
                     'name.required' => '名前を入力してください。',
@@ -48,6 +49,7 @@ class UserController extends Controller
                     'email.required' => 'メールアドレスを入力してください。',
                     'email.email' => '有効なメールアドレスを入力してください。',
                     'email.unique' => '入力されたメールアドレスは既に使用されています。',
+                    'isAdmin.required' => '権限を選択してください。'
                 ]);
 
                 $user= User::find($id);
@@ -59,6 +61,7 @@ class UserController extends Controller
                     'birthday' => $validated['birthday'],
                     'phone' => $validated['phone'],
                     'email' => $validated['email'],
+                    'isAdmin' => $request->input('isAdmin'), // ドロップダウンリストからの値を取得
                 ]);
 
                 return redirect('users');

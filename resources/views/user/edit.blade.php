@@ -14,9 +14,9 @@
                 <div class="card-header">{{ __('会員情報編集') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user/edit', ['id' => $user->id]) }}" enctype="multipart/form-data">
                         @csrf
-
+                        @method('PUT')
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('名前') }}</label>
 
@@ -99,6 +99,21 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="isAdmin" class="col-md-4 col-form-label text-md-end">{{ __('権限') }}</label>
+                            <div class="col-md-6">
+                                <select id="isAdmin" class="form-control @error('isAdmin') is-invalid @enderror" name="isAdmin" required autocomplete="isAdmin">
+                                    <option value="1" @if($user->isAdmin == 1) selected @endif>管理者</option>
+                                    <option value="2" @if($user->isAdmin == 2) selected @endif>ユーザー</option>
+                                </select>
+                                @error('isAdmin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -40,8 +40,8 @@ Route::prefix('items')->group(function () {
 
 Route::prefix('users')->group(function () {
     Route::get('/', [App\Http\Controllers\UserController::class, 'list'])->name('user/list');
-    Route::get('edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
-    Route::post('edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
+    Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
+    Route::put('/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user/edit');
     Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user/delete');
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user/profile');
     Route::get('/profile_edit/{id}', [App\Http\Controllers\UserController::class, 'profile_edit'])->name('user/profile_edit');

@@ -24,6 +24,10 @@
                                 <th>誕生日</th>
                                 <th>電話番号</th>
                                 <th>メールアドレス</th>
+                                <th>権限</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,7 +40,13 @@
                                     <td>{{ $user->birthday }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td></td>
+                                    <td>
+                                        @if($user->isAdmin === 1)
+                                            管理者
+                                        @elseif($user->isAdmin === 2)
+                                            ユーザー
+                                        @endif
+                                    </td>
                                     <td></td>
                                     <!-- 編集ボタン -->
                                     <td>
