@@ -7,6 +7,11 @@
 @stop
 
 @section('content')
+<!-- 編集成功時のメッセージ -->
+@if ( session('message') )
+    <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+@endif
+
     <div class="row">
         <div class="col-12">
             <div class="card">

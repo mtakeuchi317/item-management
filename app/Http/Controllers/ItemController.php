@@ -141,7 +141,7 @@ class ItemController extends Controller
         
                 // データを作成してリダイレクト
                 Item::create($data);
-                return redirect()->route('item/list');
+                return redirect()->route('item/list')->with('message','商品情報が登録されました。');
             }
         
             return view('item.add' ,compact('categories'));
@@ -220,7 +220,7 @@ class ItemController extends Controller
                         'detail' => $validated['detail'],
                     ]);
                 }
-            return redirect()->route('item/list');
+            return redirect()->route('item/list')->with('message','商品情報が更新されました。');
         }
         return view('item.edit', compact('item', 'categories'));
     }

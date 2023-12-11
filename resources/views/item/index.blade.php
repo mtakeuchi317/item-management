@@ -8,10 +8,6 @@
 
 @section('content')
 
-<!-- 編集成功時のメッセージ -->
-@if ( session('message') )
-    <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-@endif
 <!-- 商品検索 -->
 <div class="search">
     <form action="{{route('item/index')}}" method="get">
