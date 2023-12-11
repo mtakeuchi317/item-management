@@ -81,7 +81,7 @@ class ItemController extends Controller
     public function list()
     {
         // 商品一覧取得
-        $items = Item::paginate(7);
+        $items = Item::latest()->paginate(7);
 
         return view('item.list', compact('items'));
     }
@@ -276,7 +276,7 @@ class ItemController extends Controller
     public function showByCategoryList($category)
     {
         // カテゴリーに基づいて商品を取得する処理を書く
-        $items = Item::where('category', $category)->get();
+        $items = Item::where('category', $category)->paginate(7);
 
         // 取得した商品を別のビューに渡して表示する（例：item.list.list）
         return view('item.list', compact('items'));
