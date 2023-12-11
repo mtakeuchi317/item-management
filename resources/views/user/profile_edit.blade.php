@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', '会員情報編集')
+@section('title', 'プロフィール編集')
 
 @section('content_header')
-    <h1>会員情報編集</h1>
+    <h1>プロフィール編集</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('会員情報編集') }}</div>
+                <div class="card-header">{{ __('プロフィール編集') }}</div>
 
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
