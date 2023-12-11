@@ -78,13 +78,40 @@ class ItemController extends Controller
     /**
      * 商品一覧（管理）
      */
-    public function list()
+    public function list(Request $request)
     {
-        // 商品一覧取得
-        $items = Item::withCount('likes')->latest()->paginate(7);
-
-        return view('item.list', compact('items'));
+        // セレクトボックスで選択した値
+        $select = $request->sort_by;
+    
+        // セレクトボックスの値に応じてソート
+        switch ($select) {
+            case '1':
+                //「指定なし」はID順
+                $items = Item::withCount('likes')->latest()->paginate(7);
+                break;
+            case '2':
+                // 「登録順」でソート
+                $items = Item::withCount('likes')->oldest()->paginate(7);
+                break;
+            case '3':
+                // 「お気に入り数が多い順」でソート
+                $items = Item::withCount('likes')->orderBy('likes_count', 'desc')->paginate(7);
+                break;
+            case '4':
+                // 「お気に入り数が少ない順」でソート
+                $items = Item::withCount('likes')->orderBy('likes_count', 'asc')->paginate(7);
+                break;
+            default :
+                // デフォルトはID順
+                $items = Item::withCount('likes')->latest()->paginate(7);
+                break;
+        }
+    
+        $items->appends(['sort_by' => $select]); // 並べ替えの情報を追加する
+    
+        return view('item.list', compact('items', 'select'));
     }
+    
 
     /**
      * 商品登録
@@ -273,13 +300,41 @@ class ItemController extends Controller
         return view('item.index', compact('keyword', 'items', 'category'));
     }
 
-    public function showByCategoryList($category)
+    public function showByCategoryList($category, Request $request)
     {
         // カテゴリーに基づいて商品を取得する処理を書く
-        $items = Item::where('category', $category)->withCount('likes')->paginate(7);
+        $select = $request->sort_by;
+        switch ($select) {
+            case '1':
+                //「指定なし」はID順
+                $items = Item::where('category', $category)
+                    ->withCount('likes')->latest()->paginate(7);
+                break;
+            case '2':
+                // 「登録順」でソート
+                $items = Item::where('category', $category)
+                            ->withCount('likes')->oldest()->paginate(7);
+                break;
+            case '3':
+                // 「お気に入り数が多い順」でソート
+                $items = Item::where('category', $category)
+                            ->withCount('likes')->orderBy('likes_count', 'desc')->paginate(7);
+                break;
+            case '4':
+                // 「お気に入り数が少ない順」でソート
+                $items = Item::where('category', $category)
+                            ->withCount('likes')->orderBy('likes_count', 'asc')->paginate(7);
+                break;
+            default :
+                // デフォルトはID順
+                $items = Item::where('category', $category)
+                            ->withCount('likes')->latest()->paginate(7);
+                break;
+        }
+    $items->appends(['sort_by' => $select]); // 並べ替えの情報を追加する
 
         // 取得した商品を別のビューに渡して表示する（例：item.list.list）
-        return view('item.list', compact('items', 'category'));
+        return view('item.list', compact('items', 'category', 'select'));
     }
 
 }

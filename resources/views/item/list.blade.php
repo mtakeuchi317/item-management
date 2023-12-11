@@ -19,12 +19,19 @@
                     <h3 class="card-title">商品一覧</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
-                            <div class="input-group-append">
-                                <a href="{{ url('items/add') }}" class="btn btn-default">商品登録</a>
-                            </div>
+                            <!-- 並べ替え用のドロップダウンリスト -->
+                            <form id="form">
+                                <select class="btn btn-secondary dropdown-toggle" name="sort_by" id="sort_by">
+                                    <option value="1" {{ $select == '1' ? 'selected': '' }}>登録が新しい順</option>
+                                    <option value="2" {{ $select == '2' ? 'selected': '' }}>登録が古い順</option>
+                                    <option value="3" {{ $select == '3' ? 'selected': '' }}>お気に入り数が多い順</option>
+                                    <option value="4" {{ $select == '4' ? 'selected': '' }}>お気に入り数が少ない順</option>
+                                </select>
+                            </form>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>
@@ -90,4 +97,5 @@
 @stop
 
 @section('js')
+    <script src="{{ asset('/js/item.js') }}"></script>
 @stop

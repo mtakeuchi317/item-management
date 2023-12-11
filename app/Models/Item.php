@@ -25,7 +25,13 @@ class Item extends Model
     }
 
     public function likes() {
-        return $this->hasMany('App\Models\Like');
+        return $this->hasMany(Like::class, 'item_id');
+    }
+
+    // Itemモデルにお気に入り数をカウントするリレーションを追加
+    public function likesCount()
+    {
+        return $this->likes()->count();
     }
 
     /**
