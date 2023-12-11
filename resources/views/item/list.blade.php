@@ -34,6 +34,7 @@
                                 <th>タイトル</th>
                                 <th>作者</th>
                                 <th>カテゴリー</th>
+                                <th>お気に入り数</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -55,6 +56,7 @@
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->author }}</td>
                                     <td>{{ $item->category }}</td>
+                                    <td>{{ $item->likes_count }}</td>
                                     <!-- 編集ボタン -->
                                     <td>
                                         <form action="{{route('item/edit',['id'=>$item->id])}}" method="get">
