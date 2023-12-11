@@ -7,6 +7,15 @@
 @stop
 
 @section('content')
+<!-- ユーザー検索 -->
+<div class="search">
+    <form action="{{ route('user/list') }}" method="GET">
+        @csrf
+        <input type="text" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="キーワード検索">
+        <button type="submit" class="btn btn-primary">検索</button>
+    </form>
+</div>
+
     <div class="row">
         <div class="col-12">
             <div class="card">

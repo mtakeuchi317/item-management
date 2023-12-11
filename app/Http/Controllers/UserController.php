@@ -11,13 +11,35 @@ class UserController extends Controller
     /**
      * 会員一覧
      */
-    public function list()
+    public function list(Request $request)
     {
-        // 会員一覧取得
-        $users = User::all();
-
-        return view('user.list', compact('users'));
+        // 検索フォームで入力された値を取得する
+        $keyword = $request->input('keyword');
+    
+        // クエリビルダ
+        $query = User::query()->latest();
+    
+        if(!empty($keyword)){
+            if ($keyword === '管理者') {
+                $query->where('isAdmin', 1);
+            } elseif ($keyword === 'ユーザー') {
+                $query->where('isAdmin', 2);
+            } else {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('name', 'LIKE', "%{$keyword}%")
+                    ->orWhere('name_kana', 'LIKE', "%{$keyword}%")
+                    ->orWhere('gender', 'LIKE', "%{$keyword}%")
+                    ->orWhere('birthday', 'LIKE', "%{$keyword}%")
+                    ->orWhere('phone', 'LIKE', "%{$keyword}%")
+                    ->orWhere('email', 'LIKE', "%{$keyword}%");
+                });
+            }
+        }
+        
+        $users = $query->get();
+        return view('user.list', compact('keyword', 'users'));
     }
+    
 
     /**
      * 会員一覧から会員情報編集

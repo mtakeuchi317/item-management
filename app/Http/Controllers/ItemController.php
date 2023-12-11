@@ -33,9 +33,11 @@ class ItemController extends Controller
 
         if(!empty($keyword)){
             $query->where(function ($q) use ($keyword) {
-                $q->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('author', 'LIKE', "%{$keyword}%")
-                ->orWhere('category', 'LIKE', "%{$keyword}%");
+                $q->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('name_kana', 'LIKE', "%{$keyword}%")
+                ->orWhere('birthday', 'LIKE', "%{$keyword}%")
+                ->orWhere('ohone', 'LIKE', "%{$keyword}%")
+                ->orWhere('email', 'LIKE', "%{$keyword}%");
             });
         }
         $items = $query->paginate(14);
