@@ -36,6 +36,7 @@ Route::prefix('items')->group(function () {
     Route::get('/itemsinfo/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfo'])->name('itemsinfo');
     Route::get('/{category}', [App\Http\Controllers\ItemController::class, 'showByCategory'])->name('items.by.category');
     Route::get('/{category}/itemsinfo/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfoByCategory'])->name('itemsinfo.by.category');
+    Route::get('/itemsinfo/by/like/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfoByLike'])->name('itemsinfo.by.like');
     Route::get('/list/{category}', [App\Http\Controllers\ItemController::class, 'showByCategoryList'])->name('items.list.by.category');
 });
 

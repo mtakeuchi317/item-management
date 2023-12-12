@@ -25,7 +25,7 @@
 <div class="items">
     @foreach($items as $item)
     <div class="item">
-        <a href="{{ route('itemsinfo', ['id' => $item->id]) }}">
+        <a href="{{ route('itemsinfo.by.like', ['id' => $item->id]) }}">
             @if($item->img_name)
                 <img src="{{ $item->img_name }}" class="card-img-top" alt="Product Image">
             @else

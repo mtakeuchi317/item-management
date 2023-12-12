@@ -399,5 +399,46 @@ class ItemController extends Controller
         return view('item.itemsinfo', compact('info', 'like', 'previousItemUrl', 'nextItemUrl', 'category'));
     }
     
+    public function itemsinfoByLike($id){
+        // 指定された商品IDに紐づくお気に入り情報を取得
+        $like = Like::where('item_id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+        
+        // 商品情報を取得
+        $info = Item::findOrFail($like->item_id);
+        
+        // ユーザーのお気に入りリストから商品IDのリストを取得
+        $userLikes = Like::where('user_id', auth()->id())
+            ->pluck('item_id')
+            ->toArray();
+        
+        // ユーザーのお気に入りリストから現在の商品のインデックスを取得
+        $currentIndex = array_search($info->id, $userLikes);
+        
+        // 前の商品のIDを取得
+        $previousItemId = null;
+        if ($currentIndex !== false && $currentIndex > 0) {
+            $previousItemId = $userLikes[$currentIndex - 1];
+        }
+    
+        // 次の商品のIDを取得
+        $nextItemId = null;
+        if ($currentIndex !== false && $currentIndex < count($userLikes) - 1) {
+            $nextItemId = $userLikes[$currentIndex + 1];
+        }
+    
+        // 前の商品のURL
+        $previousItemUrl = ($previousItemId) ? route('itemsinfo.by.like', ['id' => $previousItemId]) : '';
+        
+        // 次の商品のURL
+        $nextItemUrl = ($nextItemId) ? route('itemsinfo.by.like', ['id' => $nextItemId]) : '';
 
+        $category = 'お気に入り';
+    
+        return view('item.itemsinfo', compact('info', 'like', 'previousItemUrl', 'nextItemUrl', 'category'));
+    }
+    
+    
+    
 }
