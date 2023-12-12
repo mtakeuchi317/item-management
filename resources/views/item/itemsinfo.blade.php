@@ -3,7 +3,7 @@
 @section('title', '商品情報')
 
 @section('content_header')
-    <h1>商品情報</h1>
+    <h1>商品情報 <{{ isset($category) ? $category : 'すべての商品' }}></h1>
 @stop
 
 @section('content')
@@ -43,18 +43,18 @@
                     @endif
                 </span>
                 <div class="link">
-                    <div class="previous-page">
-                        @if ($previousItemUrl)
-                            <a href="{{ $previousItemUrl }}">前のページ</a>
-                        @else
-                            <span>前のページ</span>
-                        @endif
-                    </div>
                     <div class="next-page">
                         @if ($nextItemUrl)
                             <a href="{{ $nextItemUrl }}">次のページ</a>
                         @else
                             <span>次のページ</span>
+                        @endif
+                    </div>
+                    <div class="previous-page">
+                        @if ($previousItemUrl)
+                            <a href="{{ $previousItemUrl }}">前のページ</a>
+                        @else
+                            <span>前のページ</span>
                         @endif
                     </div>
                 </div>

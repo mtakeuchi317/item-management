@@ -21,7 +21,7 @@
 <div class="items">
     @foreach($items as $item)
     <div class="item">
-        <a href="{{ route('itemsinfo', ['id'=>$item->id]) }}">
+    <a href="{{ (strpos(Request::url(), 'items/') !== false) ? route('itemsinfo.by.category', ['category' => $item->category, 'id' => $item->id]) : route('itemsinfo', ['id' => $item->id]) }}">
             @if($item->img_name)
             <img src="{{ $item->img_name }}" class="card-img-top" alt="Product Image">
             @else

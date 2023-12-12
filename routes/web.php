@@ -35,6 +35,7 @@ Route::prefix('items')->group(function () {
     Route::delete('/delete/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('item/delete');
     Route::get('/itemsinfo/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfo'])->name('itemsinfo');
     Route::get('/{category}', [App\Http\Controllers\ItemController::class, 'showByCategory'])->name('items.by.category');
+    Route::get('/{category}/itemsinfo/{id}', [App\Http\Controllers\ItemController::class, 'itemsinfoByCategory'])->name('itemsinfo.by.category');
     Route::get('/list/{category}', [App\Http\Controllers\ItemController::class, 'showByCategoryList'])->name('items.list.by.category');
 });
 

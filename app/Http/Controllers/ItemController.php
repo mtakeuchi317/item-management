@@ -320,7 +320,7 @@ class ItemController extends Controller
             });
         }
     
-        $items = $query->paginate(14);
+        $items = $query->latest('created_at')->paginate(14);
     
         // 取得した商品をビューに渡して表示する
         return view('item.index', compact('keyword', 'items', 'category'));
@@ -370,6 +370,34 @@ class ItemController extends Controller
         return view('item.list', compact('items', 'category', 'select', 'keyword'));
     }
     
-
+    public function itemsinfoByCategory($category, $id){
+        $info = Item::where('id', $id)
+            ->where('category', $category)
+            ->firstOrFail();
+    
+        // ユーザーがいいねしているか確認
+        $like = Like::where('item_id', $info->id)
+            ->where('user_id', auth()->id())
+            ->first();
+    
+        // 前の商品のIDを取得
+        $previousItemId = Item::where('id', '<', $info->id)
+            ->where('category', $category)
+            ->max('id');
+    
+        // 次の商品のIDを取得
+        $nextItemId = Item::where('id', '>', $info->id)
+            ->where('category', $category)
+            ->min('id');
+    
+        // 前の商品のURL
+        $previousItemUrl = ($previousItemId) ? route('itemsinfo.by.category', ['category' => $category, 'id' => $previousItemId]) : '';
+    
+        // 次の商品のURL
+        $nextItemUrl = ($nextItemId) ? route('itemsinfo.by.category', ['category' => $category, 'id' => $nextItemId]) : '';
+    
+        return view('item.itemsinfo', compact('info', 'like', 'previousItemUrl', 'nextItemUrl', 'category'));
+    }
+    
 
 }
