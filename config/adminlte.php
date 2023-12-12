@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>book.jp</b>',
+    'logo' => '<b>Book.jp</b>',
     'logo_img' => 'img/Book icon.png',
     'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => null,
