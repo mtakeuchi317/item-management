@@ -12,8 +12,6 @@ class Item extends Model
      * @var array<int, string>
      */
 
-    protected $table = 'items_table';
-
     protected $fillable = [
         'user_id',
         'title',
