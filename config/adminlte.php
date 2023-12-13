@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Book.jp</b>',
-    'logo_img' => 'img/Book icon.png',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
