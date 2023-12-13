@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
         Validator::replacer('katakana', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':attribute', 'フリガナ', ':attributeは全角カタカナで入力してください');
         });
+
+        if(\App::environment(['production'])) {
+            \URL::forseScheme('https');
+        }
     }
 }
