@@ -75,19 +75,16 @@ class ItemController extends Controller
     
     // 管理者用ページ
 
-    /**
-     * 商品一覧（管理）
-     */
     public function list(Request $request)
     {
         // セレクトボックスで選択した値
         $select = $request->sort_by;
     
+        // クエリビルダ
+        $query = Item::query();
+    
         // 検索フォームで入力された値を取得する
         $keyword = $request->input('keyword');
-    
-        // クエリビルダ
-        $query = Item::withCount('likes')->latest();
     
         if (!empty($keyword)) {
             $query->where(function ($q) use ($keyword) {
@@ -97,36 +94,35 @@ class ItemController extends Controller
             });
         }
     
-        // セレクトボックスの値に応じてソート
         switch ($select) {
             case '1':
                 //「指定なし」はID順
-                $query->latest();
+                $query->withCount('likes')->latest();
                 break;
             case '2':
                 // 「登録順」でソート
-                $query->oldest();
+                $query->withCount('likes')->oldest();
                 break;
             case '3':
                 // 「お気に入り数が多い順」でソート
-                $query->orderBy('likes_count', 'desc');
+                $query->withCount('likes')->orderBy('likes_count', 'desc');
                 break;
             case '4':
                 // 「お気に入り数が少ない順」でソート
-                $query->orderBy('likes_count', 'asc');
+                $query->withCount('likes')->orderBy('likes_count', 'asc');
                 break;
             default:
                 // デフォルトはID順
-                $query->latest();
+                $query->withCount('likes')->latest();
                 break;
         }
     
         $items = $query->paginate(7);
-    
-        $items->appends(['sort_by' => $select, 'keyword' => $keyword]); // 並べ替えと検索の情報を追加する
+        $items->appends(['sort_by' => $select]); // 並べ替えの情報を追加する
     
         return view('item.list', compact('items', 'select', 'keyword'));
     }
+    
     
     
 
