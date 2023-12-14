@@ -48,7 +48,7 @@ class ChangePasswordRequest extends FormRequest
             
             //現在のパスワードと新しいパスワードが合わなければエラー
             if (!(Hash::check($this->input('current_password'), $auth->password))) {
-                $validator->errors()->add('current_password', __('The current password is incorrect.'));
+                $validator->errors()->add('current_password', __('現在のパスワードが違います。'));
             }
         });
     }
