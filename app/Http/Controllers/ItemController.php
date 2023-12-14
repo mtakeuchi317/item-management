@@ -83,49 +83,51 @@ class ItemController extends Controller
         // セレクトボックスで選択した値
         $select = $request->sort_by;
     
+        // 検索フォームで入力された値を取得する
+        $keyword = $request->input('keyword');
+    
+        // クエリビルダ
+        $query = Item::withCount('likes')->latest();
+    
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('author', 'LIKE', "%{$keyword}%")
+                    ->orWhere('category', 'LIKE', "%{$keyword}%");
+            });
+        }
+    
         // セレクトボックスの値に応じてソート
         switch ($select) {
             case '1':
                 //「指定なし」はID順
-                $items = Item::withCount('likes')->latest()->paginate(7);
+                $query->latest();
                 break;
             case '2':
                 // 「登録順」でソート
-                $items = Item::withCount('likes')->oldest()->paginate(7);
+                $query->oldest();
                 break;
             case '3':
                 // 「お気に入り数が多い順」でソート
-                $items = Item::withCount('likes')->orderBy('likes_count', 'desc')->paginate(7);
+                $query->orderBy('likes_count', 'desc');
                 break;
             case '4':
                 // 「お気に入り数が少ない順」でソート
-                $items = Item::withCount('likes')->orderBy('likes_count', 'asc')->paginate(7);
+                $query->orderBy('likes_count', 'asc');
                 break;
-            default :
+            default:
                 // デフォルトはID順
-                $items = Item::withCount('likes')->latest()->paginate(7);
+                $query->latest();
                 break;
         }
     
-        $items->appends(['sort_by' => $select]); // 並べ替えの情報を追加する
-
-        // 検索フォームで入力された値を取得する
-        $keyword = $request->input('keyword');
-
-        // クエリビルダ
-        $query = Item::query()->latest();
-
-        if(!empty($keyword)){
-            $query->where(function ($q) use ($keyword) {
-                $q->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('author', 'LIKE', "%{$keyword}%")
-                ->orWhere('category', 'LIKE', "%{$keyword}%");
-            });
-        }
         $items = $query->paginate(7);
+    
+        $items->appends(['sort_by' => $select, 'keyword' => $keyword]); // 並べ替えと検索の情報を追加する
     
         return view('item.list', compact('items', 'select', 'keyword'));
     }
+    
     
 
     /**
