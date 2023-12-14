@@ -30,6 +30,18 @@ class ChangePasswordRequest extends FormRequest
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ];
     }
+    public function messages(): array
+{
+    return [
+        'current_password.required' => '現在のパスワードを入力してください。',
+        'current_password.string' => 'パスワードは文字列で入力してください。',
+        'current_password.min' => 'パスワードは少なくとも8文字以上で入力してください。',
+        'password.required' => '新しいパスワードを入力してください。',
+        'password.string' => 'パスワードは文字列で入力してください。',
+        'password.min' => 'パスワードは少なくとも8文字以上で入力してください。',
+        'password.confirmed' => 'パスワードの確認が一致しません。',
+    ];
+}
     public function withValidator(Validator $validator) {
         $validator->after(function ($validator) {
             $auth = Auth::user();
