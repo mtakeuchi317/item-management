@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{route('user/profile_edit',['id'=>$user->id])}}" method="get">
+                <form action="{{route('user/profile_edit',['id'=>$user->id])}}" method="get" style="display: flex; justify-content: center; margin-bottom: 20px;">
                     @csrf
                     <button type="submit" class="btn btn-outline-primary">編集</button>
                 </form>
