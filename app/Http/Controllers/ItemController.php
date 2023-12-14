@@ -274,7 +274,7 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $item->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message','商品情報が削除されました。');;
     }
 
     /**

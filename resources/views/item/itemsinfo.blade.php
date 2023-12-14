@@ -18,7 +18,7 @@
                         <img src="{{ $info->img_name }}" alt="{{ $info->img_name }}" class="img-large">
                     @else
                         <!-- img_name が存在しない場合の処理 -->
-                        <img src="http://design-ec.com/d/e_others_50/m_e_others_500.png" alt="No Image" class="img-large">
+                        <img src="https://www.shoshinsha-design.com/wp-content/uploads/2020/05/noimage-760x460.png" alt="No Image" class="img-large">
                     @endif
                 </div>
                 <!-- お気に入りボタン -->
