@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'name_kana' => ['required', 'string', 'max:255', 'katakana'],
             'gender' => ['required', 'in:未回答,男,女'],
-            'birthday' => ['required'],
+            'birthday' => ['required','date', 'before_or_equal:today'],
             'phone' => ['required','max_digits:11','numeric'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
