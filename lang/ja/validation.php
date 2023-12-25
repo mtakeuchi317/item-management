@@ -14,7 +14,7 @@ return [
     'array'                => ':Attributeには、配列を指定してください。',
     'ascii'                => ':Attributeには、英数字と記号のみ使用可能です。',
     'before'               => ':Attributeには、:dateより前の日付を指定してください。',
-    'before_or_equal'      => '生年月日には、今日より前の日付を指定してください。',
+    'before_or_equal'      => ':Attributeには、:date以前の日付を指定してください。',
     'between'              => [
         'array'   => ':Attributeの項目は、:min個から:max個にしてください。',
         'file'    => ':Attributeには、:min KBから:max KBまでのサイズのファイルを指定してください。',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8da53bd5ee94389294e25426f5c7a583",
+    "content-hash": "43ac4a82b8857e045bce2e8339b4b8b2",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1534,27 +1534,27 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "13.11.0",
+            "version": "14.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "979db1554ad5708e5d4fc8a48d6312fbd6cfa03e"
+                "reference": "d66cbd1d95791ab700f29c37e04a6853e152e0e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/979db1554ad5708e5d4fc8a48d6312fbd6cfa03e",
-                "reference": "979db1554ad5708e5d4fc8a48d6312fbd6cfa03e",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/d66cbd1d95791ab700f29c37e04a6853e152e0e3",
+                "reference": "d66cbd1d95791ab700f29c37e04a6853e152e0e3",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel-lang/publisher": "^14.0 || ^15.0",
+                "laravel-lang/publisher": "^14.0 || ^15.0 || ^16.0",
                 "php": "^8.1"
             },
             "require-dev": {
                 "laravel-lang/status-generator": "^1.19 || ^2.0",
                 "phpunit/phpunit": "^10.0",
-                "symfony/var-dumper": "^6.0"
+                "symfony/var-dumper": "^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
@@ -1590,7 +1590,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2023-12-08T08:04:30+00:00"
+            "time": "2023-12-21T13:20:40+00:00"
         },
         {
             "name": "laravel-lang/publisher",
