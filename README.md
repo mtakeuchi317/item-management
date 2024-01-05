@@ -23,7 +23,12 @@ Laravel 10.13.5
 [アプリケーションページへ](https://book-item-management-10c06860f529.herokuapp.com/login)
 ### テストアカウント情報
 ```
+【ユーザー】
 メールアドレス:new1@gmail.com
+パスワード:12345678
+
+【管理者】
+メールアドレス:admin@example.com
 パスワード:12345678
 ```
 
