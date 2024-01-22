@@ -17,7 +17,7 @@ MySQL 10.4.28
 Laravel 10.13.5
 
 ## 設計書
-[設計書ページへ](設計書のURL)
+[設計書ページへ](https://drive.google.com/drive/folders/1g5CH0tZ6ObZmhKfQ3CeLBMgRNQ1uW_hF?usp=drive_link)
 
 ## システム閲覧
 [アプリケーションページへ](https://book-item-management-10c06860f529.herokuapp.com/login)
